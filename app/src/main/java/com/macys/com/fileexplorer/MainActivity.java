@@ -82,7 +82,9 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
         Intent myShareIntent = new Intent(Intent.ACTION_SEND);
         myShareIntent.setType("text/plain");
         if (mFileScanResult != null) {
-            myShareIntent.putExtra(Intent.EXTRA_TEXT, mFileScanResult.getAverageFileSize());
+            myShareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.average_file_size) +
+                    "  " + mFileScanResult.getAverageFileSize() +
+                    "  " + getResources().getString(R.string.bytes));
         }
         mShareActionProvider.setShareIntent(myShareIntent);
     }

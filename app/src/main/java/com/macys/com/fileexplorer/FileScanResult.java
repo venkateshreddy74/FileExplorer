@@ -10,7 +10,16 @@ public class FileScanResult implements Serializable {
     List<File> largeFiles;  // list of large files on SD card
     String averageFileSize;
     HashMap<String, Integer> frequentFileExtensions; //map of file extensions to frequencies
+    String errorMessage;
     boolean scanComplete = false;
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
     public boolean isScanComplete() {
         return scanComplete;

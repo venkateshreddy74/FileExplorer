@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">FileExplorer</string>
-    <string name="intro_text">Hi,Click on Start button to Start Scanning the SD card inserted in to your phone.</string>
+    <string name="intro_text">Click on Start button to Start Scanning the SD card of your phone.</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="view_results">View Results</string>
@@ -14,4 +14,6 @@
     <string name="channel_id">channelId</string>
     <string name="notification_title">File Explorer</string>
     <string name="notification_content">Scanning SD card is in progress</string>
+    <string name="error_sd_card">Can\'t read SD card..Please try again later</string>
+    <string name="no_sd_card">No SD card available on Device..Please try on a different device</string>
 </resources>

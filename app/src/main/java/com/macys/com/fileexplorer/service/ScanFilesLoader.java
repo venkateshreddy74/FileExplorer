@@ -74,7 +74,6 @@ public class ScanFilesLoader extends AsyncTaskLoader<FileScanResult> {
     public FileScanResult loadInBackground() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             try {
-
                 //setup notification
                 setUpNotification();
                 List<File> files = new ArrayList<File>();
@@ -84,12 +83,14 @@ public class ScanFilesLoader extends AsyncTaskLoader<FileScanResult> {
                 mFileScanResult.setAverageFileSize(getAverageFileSize(files));
                 mFileScanResult.setFrequentFileExtensions(getTopFiveFileExtensionsWithFrequencies(files));
                 mFileScanResult.setScanComplete(true);
-
             } catch (Exception e) {
+                mFileScanResult.setErrorMessage(getContext().getResources().getString(R.string.error_sd_card));
+                mFileScanResult.setScanComplete(true);
                 e.printStackTrace();
             }
         } else {
-            //TODO no SD card throw an Error ?
+            mFileScanResult.setErrorMessage(getContext().getResources().getString(R.string.no_sd_card));
+            mFileScanResult.setScanComplete(true);
         }
 
         return mFileScanResult;

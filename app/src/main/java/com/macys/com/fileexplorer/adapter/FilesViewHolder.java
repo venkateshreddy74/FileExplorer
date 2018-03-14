@@ -15,7 +15,7 @@ public class FilesViewHolder extends RecyclerView.ViewHolder {
 
     public FilesViewHolder(Context context, View itemView) {
         super(itemView);
-        fileNameView = itemView.findViewById(R.id.file_name_text_view);
+        this.fileNameView = itemView.findViewById(R.id.file_name_text_view);
         this.context = context;
     }
 }

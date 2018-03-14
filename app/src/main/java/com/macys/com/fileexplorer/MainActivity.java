@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.macys.com.fileexplorer.service.ScanFilesLoader;
 import com.macys.com.fileexplorer.utils.FileExplorerConstants;
@@ -35,11 +36,11 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
     private TextView mScanText;
     private FileScanResult mFileScanResult;
     private ShareActionProvider mShareActionProvider;
+    private MenuItem shareItem;
 
 
     private LoaderManager.LoaderCallbacks<FileScanResult>
             mLoaderCallbacks =
-
             new LoaderManager.LoaderCallbacks<FileScanResult>() {
                 @Override
                 public Loader<FileScanResult> onCreateLoader(int id, Bundle args) {
@@ -50,10 +51,18 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
                 public void onLoadFinished(Loader<FileScanResult> loader, FileScanResult data) {
                     if (data.isScanComplete()) {
                         //dismiss progress dialog
-                        mFileScanResult = data;
-                        mProgressbar.setVisibility(View.INVISIBLE);
-                        mScanText.setVisibility(View.INVISIBLE);
-                        mViewResults.setEnabled(true);
+                        if (data.getErrorMessage() != null) {
+                            mProgressbar.setVisibility(View.INVISIBLE);
+                            mScanText.setVisibility(View.INVISIBLE);
+                            mFileScanResult = data;
+                            Toast.makeText(getBaseContext(), data.errorMessage, Toast.LENGTH_LONG).show();
+                        } else {
+                            mFileScanResult = data;
+                            mProgressbar.setVisibility(View.INVISIBLE);
+                            mScanText.setVisibility(View.INVISIBLE);
+                            mViewResults.setEnabled(true);
+                            shareItem.setVisible(true);
+                        }
                     } else {
                         //show progress dialog
                         mProgressbar.setVisibility(View.VISIBLE);
@@ -93,8 +102,8 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_item, menu);
-
-        MenuItem shareItem = menu.findItem(R.id.action_share);
+        shareItem = menu.findItem(R.id.action_share);
+        shareItem.setVisible(false);
         mShareActionProvider =
                 (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
 

@@ -1,6 +1,8 @@
 # FileExplorer
 A FileExplorer App that gets the statistics of all the files present on SD card 
 
+Assumption: SD card here is assumed to be the memory location returned by  Environment.getExternalStorageDirectory() of Android SDK,which the primary shared/external storage directory.
+
 1.App has a Start button and Stop button on the Home Screen
 
 2.Start button triggers scanning the SD card on the device if there exists one

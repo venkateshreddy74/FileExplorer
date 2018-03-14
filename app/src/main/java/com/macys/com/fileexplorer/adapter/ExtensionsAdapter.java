@@ -61,6 +61,6 @@ public final class ExtensionsAdapter extends RecyclerView.Adapter<ExtensionsView
 
     @Override
     public int getItemCount() {
-        return extensionMap.size(); //TODO Change this to 5
+        return extensionMap.size();
     }
 }

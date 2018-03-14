@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
                             mScanText.setVisibility(View.INVISIBLE);
                             mViewResults.setEnabled(true);
                             shareItem.setVisible(true);
+                            setSharedIntent();
                         }
                     } else {
                         //show progress dialog
@@ -77,6 +78,14 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
                 }
             };
 
+    private void setSharedIntent() {
+        Intent myShareIntent = new Intent(Intent.ACTION_SEND);
+        myShareIntent.setType("text/plain");
+        if (mFileScanResult != null) {
+            myShareIntent.putExtra(Intent.EXTRA_TEXT, mFileScanResult.getAverageFileSize());
+        }
+        mShareActionProvider.setShareIntent(myShareIntent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,11 +119,6 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
         shareItem.setVisible(false);
         mShareActionProvider =
                 (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-
-        Intent myShareIntent = new Intent(Intent.ACTION_SEND);
-        myShareIntent.setType("image/*");
-        myShareIntent.putExtra(Intent.EXTRA_STREAM, "");
-        mShareActionProvider.setShareIntent(myShareIntent);
         return true;
     }
 

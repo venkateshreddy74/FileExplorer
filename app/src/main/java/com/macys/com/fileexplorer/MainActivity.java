@@ -24,6 +24,9 @@ import android.widget.Toast;
 import com.macys.com.fileexplorer.service.ScanFilesLoader;
 import com.macys.com.fileexplorer.utils.FileExplorerConstants;
 
+import java.util.Iterator;
+import java.util.Map;
+
 
 public class MainActivity extends AppCompatActivity implements ShareActionProvider.OnShareTargetSelectedListener {
 
@@ -84,10 +87,37 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
         if (mFileScanResult != null) {
             myShareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.average_file_size) +
                     "  " + mFileScanResult.getAverageFileSize() +
-                    "  " + getResources().getString(R.string.bytes));
+                    "  " + getResources().getString(R.string.bytes) + getLargeFileNamesAsString() + getFrequentFileExtensionsAsString());
+
         }
         mShareActionProvider.setShareIntent(myShareIntent);
     }
+
+
+    private String getLargeFileNamesAsString() {
+        String fileNames = "\n" + getResources().getString(R.string.top_10_files);
+        for (int i = 0; i < mFileScanResult.getLargeFiles().size(); i++) {
+            fileNames = fileNames + "\n";
+            fileNames = fileNames + mFileScanResult.getLargeFiles().get(i).getName() + "  " + mFileScanResult.getLargeFiles().get(i).length() +
+                    "   " + getResources().getString(R.string.bytes);
+        }
+        return fileNames;
+    }
+
+
+    private String getFrequentFileExtensionsAsString() {
+        int count = 0;
+        String fileextensions = "\n" + getResources().getString(R.string.top_5_extensions);
+        Iterator it = mFileScanResult.getFrequentFileExtensions().entrySet().iterator();
+        while (it.hasNext() && count < 5) {
+            fileextensions = fileextensions + "\n";
+            Map.Entry pair = (Map.Entry) it.next();
+            fileextensions = fileextensions + pair.getKey() + " COUNT:    " + pair.getValue();
+            count++;
+        }
+        return fileextensions;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

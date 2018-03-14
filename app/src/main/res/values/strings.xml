@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">FileExplorer</string>
+    <string name="intro_text">Hi,Click on Start button to Start Scanning the SD card inserted in to your phone.</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="view_results">View Results</string>
+    <string name="top_10_files">Top 10 largest Files on SD Card :</string>
+    <string name="average_file_size">Average File Size on SD Card is  </string>
+    <string name="top_5_extensions">File extensions on SD Card with Frequencies :</string>
+    <string name="bytes">bytes</string>
+    <string name="scanning_files">Scanning Files on SD card</string>
+    <string name="channel_name">channelname</string>
+    <string name="channel_description">channeldescription</string>
+    <string name="channel_id">channelId</string>
+    <string name="notification_title">File Explorer</string>
+    <string name="notification_content">Scanning SD card is in progress</string>
+</resources>

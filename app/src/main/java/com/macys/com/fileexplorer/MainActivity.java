@@ -88,15 +88,19 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
         isStoragePermissionGranted();
         bindViews();
         setupListeners();
-
         if (savedInstanceState != null && savedInstanceState.getBoolean(FileExplorerConstants.IS_LOADING, false)) {
-            setUpLoader();
-            mProgressbar.setVisibility(View.VISIBLE);
-            mScanText.setVisibility(View.VISIBLE);
-            mStopButton.setEnabled(true);
-            mStartButton.setEnabled(false);
+            startOrAttachLoader();
         }
 
+    }
+
+
+    private void startOrAttachLoader() {
+        setUpLoader();
+        mProgressbar.setVisibility(View.VISIBLE);
+        mScanText.setVisibility(View.VISIBLE);
+        mStopButton.setEnabled(true);
+        mStartButton.setEnabled(false);
     }
 
     @Override
@@ -141,11 +145,7 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
         mStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setUpLoader();
-                mProgressbar.setVisibility(View.VISIBLE);
-                mScanText.setVisibility(View.VISIBLE);
-                mStopButton.setEnabled(true);
-                mStartButton.setEnabled(false);
+                startOrAttachLoader();
             }
         });
 

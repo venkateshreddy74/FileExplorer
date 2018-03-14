@@ -214,6 +214,11 @@ public class MainActivity extends AppCompatActivity implements ShareActionProvid
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        stopLoader();
+    }
 
     @Override
     public boolean onShareTargetSelected(ShareActionProvider source, Intent intent) {

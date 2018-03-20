@@ -140,8 +140,15 @@ public class ScanFilesLoader extends AsyncTaskLoader<FileScanResult> {
                 return (int) (o2.length() - o1.length());
             }
         });
-        //Add the last 10 files from the
-        for (int i = 0; i < 10; i++) {
+        int topLargeFiles = 0;
+
+        if (fileList.size() >= 10) {
+            topLargeFiles = 10;
+        } else {
+            topLargeFiles = fileList.size();
+        }
+        //Add the last 10 files from the SD card ,if SD card card has less than 10 files add all files
+        for (int i = 0; i < topLargeFiles; i++) {
             largeFiles.add(fileList.get(i));
         }
 
